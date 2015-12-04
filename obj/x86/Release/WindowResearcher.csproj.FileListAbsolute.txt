@@ -1,0 +1,9 @@
+D:\Work\Programming\STUFF\WindowResearcher\bin\Release\WindowResearcher.exe
+D:\Work\Programming\STUFF\WindowResearcher\bin\Release\WindowResearcher.pdb
+D:\Work\Programming\STUFF\WindowResearcher\obj\x86\Release\ResolveAssemblyReference.cache
+D:\Work\Programming\STUFF\WindowResearcher\obj\x86\Release\WindowResearcher.WindowResearcherMainForm.resources
+D:\Work\Programming\STUFF\WindowResearcher\obj\x86\Release\WindowResearcher.Properties.Resources.resources
+D:\Work\Programming\STUFF\WindowResearcher\obj\x86\Release\GenerateResource.read.1.tlog
+D:\Work\Programming\STUFF\WindowResearcher\obj\x86\Release\GenerateResource.write.1.tlog
+D:\Work\Programming\STUFF\WindowResearcher\obj\x86\Release\WindowResearcher.exe
+D:\Work\Programming\STUFF\WindowResearcher\obj\x86\Release\WindowResearcher.pdb

@@ -1,0 +1,109 @@
+        /**
+         * Получить координаты курсора
+         **/ 
+        private void getCursorPosition()
+        {
+            WinApiFunctions.GetCursorPos(ref _cursorPosition);
+            labelXMousePosition.Text = "X: " + _cursorPosition.X.ToString();
+            labelYMousePosition.Text = "Y: " + _cursorPosition.Y.ToString();
+        }
+
+        /**
+         * Получить дескриптор окна 
+         * находящегося в указанных координатах
+        **/
+        private IntPtr getHwnd()
+        {
+            IntPtr hwnd = WinApiFunctions.WindowFromPoint(_cursorPosition);
+            textBoxWindowHandle.Text = hwnd.ToString();
+            return hwnd;
+        }
+
+        /**
+         * Получить имя класса окна
+        **/
+        private void getWindowClass(IntPtr hwnd)
+        {
+            StringBuilder lpClassName = new StringBuilder(100);
+            WinApiFunctions.GetClassName(hwnd, lpClassName, lpClassName.Capacity);
+            textBoxWindowClass.Text = lpClassName.ToString();
+        }
+
+        /**
+         * Получить заголовок окна
+        **/
+        private void getWindowCaption(IntPtr hwnd)
+        {
+            StringBuilder windowCaption = new StringBuilder(100);
+            WinApiFunctions.GetWindowText(hwnd, windowCaption, windowCaption.Capacity);
+            textBoxWindowCaption.Text = windowCaption.ToString();
+        }
+
+        /**
+         * Изменить изображение курсора и picturebox'а с прицелом
+        **/
+        private void changeCursorAndPictureBoxImage(Cursor cursor, Image image)
+        {
+            this.Cursor = cursor;
+            pictureBoxSearch.Image = image;
+        }
+
+        /**
+         * Получить размеры и положение окна
+         **/
+        private void getWindowSizeAndPosition(IntPtr hwnd)
+        {
+            if (!WinApiFunctions.GetWindowRect(hwnd, out nativeWindowRectangle))
+            {
+                MessageBox.Show("Ошибка при получении размеров окна.");
+                return;
+            }
+
+            windowRectangle.X = nativeWindowRectangle.Left;
+            windowRectangle.Y = nativeWindowRectangle.Top;
+            windowRectangle.Width = nativeWindowRectangle.Right - nativeWindowRectangle.Left;
+            windowRectangle.Height = nativeWindowRectangle.Bottom - nativeWindowRectangle.Top;
+            
+            //Размеры окна
+            textBoxWindowWidth.Text  = windowRectangle.Width.ToString();
+            textBoxWindowHeight.Text = windowRectangle.Height.ToString();
+
+            //Положение окна
+            textBoxWindowPositionX.Text = nativeWindowRectangle.Left.ToString();
+            textBoxWindowPositionY.Text = nativeWindowRectangle.Top.ToString();
+        }
+
+        /**
+        * Получить информацию о процессе создавшем окно
+        **///Доработать
+        private void getWindowProcessInfo(IntPtr hwnd)
+        {
+            //foreach (Process p in Process.GetProcesses())
+            //{
+            //    if (p.Handle == hwnd)
+            //    {
+            //        textBoxWindowProcessInfo.Text = p.BasePriority.ToString() + " | ";
+            //        textBoxWindowProcessInfo.Text += p.Handle.ToString() + " | ";
+            //        textBoxWindowProcessInfo.Text += p.Id.ToString() + " | ";
+            //    }
+            //}
+
+            //Process windowProcess = ProcessHandler.findProcess(hwnd);
+            //textBoxWindowProcessInfo.Text = windowProcess.BasePriority.ToString() + " | ";
+            //textBoxWindowProcessInfo.Text += windowProcess.Handle.ToString() + " | ";
+            //textBoxWindowProcessInfo.Text += windowProcess.Id.ToString() + " | ";
+        }
+
+        /**
+        * Получить стили окна 
+        **///Доработать
+        private void getWindowStyles(IntPtr hwnd)
+        {
+            long windowStyle = WinApiFunctions.GetWindowLong(hwnd, GWL_EXSTYLE);
+
+            for (int i = 0; i < windowStyles.Length; i++)
+            {
+                if (windowStyle == windowStyles[i].id)
+                    textBoxWindowStyles.Text = windowStyles[i].name + " ";
+            }
+        }
